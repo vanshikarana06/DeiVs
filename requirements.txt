@@ -16,3 +16,6 @@ opencv-python-headless==4.10.0.84
 google-genai==1.73.0
 python-dotenv==1.2.2
 requests==2.33.1
+
+# Mandatory for handling file/image upload form parsing in FastAPI
+python-multipart==0.0.12
