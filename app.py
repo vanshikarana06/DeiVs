@@ -30,7 +30,12 @@ templates = Jinja2Templates(directory="templates")
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
 # ── ML Model ─────────────────────────────
-model = tf.keras.models.load_model('best_dual_input_model_final.h5')
+# Computes absolute path to prevent directory resolution failures on cloud servers
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+MODEL_PATH = os.path.join(BASE_DIR, 'best_dual_input_model_final.h5')
+
+# compile=False optimizes RAM by skipping training gradients/optimizers during inference
+model = tf.keras.models.load_model(MODEL_PATH, compile=False)
 
 # ── Gemini Client ─────────────────────────
 client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
