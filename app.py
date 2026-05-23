@@ -34,6 +34,9 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, 'best_dual_input_model_final.h5')
 
+# Set global model holder to None at server boot (Instant boot speed)
+model = None
+
 # compile=False optimizes RAM by skipping training gradients/optimizers during inference
 model = tf.keras.models.load_model(MODEL_PATH, compile=False)
 
@@ -144,6 +147,14 @@ async def user_view(request: Request):
 @app.post("/analyze")
 async def analyze(file: UploadFile = File(...)):
     global last_analysis
+    global model
+    
+    # Lazy load the model only when the first request arrives
+    if model is None:
+        import tensorflow as tf
+        print("🤖 [AI System] Target endpoint triggered. Initializing forensic weights array...")
+        model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+        print("✅ [AI System] Model layers mounted successfully into memory.")
 
     if not allowed_file(file.filename):
         return JSONResponse(content={"error": "Only JPG and PNG allowed"}, status_code=400)
