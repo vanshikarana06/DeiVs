@@ -6,12 +6,12 @@ pydantic==2.13.0
 Jinja2==3.1.6
 MarkupSafe==3.0.3
 
-# Rigidly matched pair to avoid NumPy 2.x binary alignment conflicts
+# The Harmonized Matrix Engine (All locked seamlessly to NumPy 1.x)
 tensorflow-cpu==2.16.2
 numpy==1.26.4
 h5py==3.10.0
 pillow==12.2.0
-opencv-python-headless==4.13.0.92
+opencv-python-headless==4.10.0.84
 
 google-genai==1.73.0
 python-dotenv==1.2.2
