@@ -32,7 +32,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 # ── ML Model ─────────────────────────────
 # Computes absolute path to prevent directory resolution failures on cloud servers
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-MODEL_PATH = os.path.join(BASE_DIR, 'best_dual_input_model_final.h5')
+MODEL_PATH = os.path.join(BASE_DIR, 'models', 'best_dual_input_model_final.h5')
 
 # Set global model holder to None at server boot (Instant boot speed)
 model = None
